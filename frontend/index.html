@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>RightTime Energy</title>
+  <style>
+    body { font-family: Arial; text-align: center; margin-top: 60px; }
+    #status { font-size: 1.5em; margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <h1>⚡ RightTime Energy</h1>
+  <div id="status">Loading...</div>
+
+  <script>
+    async function updateStatus() {
+      try {
+        const res = await fetch('http://127.0.0.1:5000/api/status');
+        const data = await res.json();
+        document.getElementById('status').textContent =
+          `${data.status} (${data.price} ¢/kWh)`;
+      } catch (e) {
+        document.getElementById('status').textContent = "Server not running";
+      }
+    }
+    updateStatus();
+  </script>
+</body>
+</html>
